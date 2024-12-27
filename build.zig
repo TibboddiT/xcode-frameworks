@@ -10,7 +10,7 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-    addPaths(&lib.root_module); // just for testing
+    addPaths(lib.root_module); // just for testing
     lib.linkLibC();
     lib.installHeadersDirectory(b.path("include"), ".", .{});
     b.installArtifact(lib);
