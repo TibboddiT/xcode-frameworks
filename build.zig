@@ -6,10 +6,14 @@ pub fn build(b: *std.Build) void {
 
     const lib = b.addStaticLibrary(.{
         .name = "xcode-frameworks",
-        .root_source_file = b.addWriteFiles().add("empty.c", ""),
         .target = target,
         .optimize = optimize,
     });
+
+    lib.addCSourceFile(.{
+        .file = b.addWriteFiles().add("empty.c", ""),
+    });
+
     addPaths(lib.root_module); // just for testing
     lib.linkLibC();
     lib.installHeadersDirectory(b.path("include"), ".", .{});
