@@ -4,10 +4,14 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const lib = b.addStaticLibrary(.{
-        .name = "xcode-frameworks",
+    const libModule = b.createModule(.{
         .target = target,
         .optimize = optimize,
+    });
+
+    const lib = b.addLibrary(.{
+        .name = "xcode-frameworks",
+        .root_module = libModule,
     });
 
     lib.addCSourceFile(.{
