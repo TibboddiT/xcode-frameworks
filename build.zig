@@ -14,12 +14,12 @@ pub fn build(b: *std.Build) void {
         .root_module = libModule,
     });
 
-    lib.addCSourceFile(.{
+    lib.root_module.addCSourceFile(.{
         .file = b.addWriteFiles().add("empty.c", ""),
     });
 
     addPaths(lib.root_module); // just for testing
-    lib.linkLibC();
+    lib.root_module.link_libc = true;
     lib.installHeadersDirectory(b.path("include"), ".", .{});
     b.installArtifact(lib);
 }
